@@ -1,0 +1,23 @@
+# schema.graphql
+directive @uppercase on FIELD_DEFINITION
+directive @auth on FIELD_DEFINITION
+
+type Todo {
+  id: ID!
+  title: String! @uppercase
+  completed: Boolean!
+}
+
+type Error {
+  message: String!
+}
+
+type Query {
+  todos: [Todo!] @auth
+}
+
+type Mutation {
+  createTodo(title: String!): Todo @auth
+  updateTodo(id: ID!, title: String, completed: Boolean): Todo @auth
+  deleteTodo(id: ID!): Todo @auth
+}
